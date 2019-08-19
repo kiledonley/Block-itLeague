@@ -1,0 +1,8 @@
+
+
+.flexibleSquare{
+    background-color: blue;
+    height: 100vh;
+    width: 100vw;
+    clip-path: polygon(25% 25%, 25% 75%, 75% 75%, 75% 25%);
+}
