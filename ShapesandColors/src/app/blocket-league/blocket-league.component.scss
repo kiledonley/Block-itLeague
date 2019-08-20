@@ -72,10 +72,48 @@ body {
     left: calc(50% - 1.5px);
 }
 .goal.blue{
-    left: -42px;
+    left: -39px;
     border-left: 3px solid white;
 }
 .goal.orange {
     right: -39px;
     border-right: 3px solid white;
+}
+
+#scoreboard{
+    display: flex;
+    flex-direction: row;
+    border: 3px solid black;
+    position: absolute;
+    top: 1.25%;
+    left: 35%;
+    height: 7.5%;
+    min-width: 30%;
+    margin: 0px;
+    padding: 0px;
+    background-color: darkgray;
+}
+
+.score, .timer{
+    height: 100%;
+    width: 20%;
+    font-size: 8vh;
+    line-height: 7.5vh;
+    color: white;
+    text-align: center;
+}
+
+.score{
+    width: 20%;
+}
+
+.timer{
+    width: 60%;
+}
+
+#infobanner{
+    position: absolute;
+    top: 30%;
+    align-content: center;
+    align-self: center;
 }

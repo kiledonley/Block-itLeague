@@ -1,9 +1,17 @@
 
+    <div id = "scoreboard">
+        <div class = "blue score">{{blueScore}}</div>
+        <div class = "timer">{{timer | time}}</div>
+        <div class = "orange score">{{orangeScore}}</div>
+    </div>
+
     <div id="arena" class="arena green">
         <div class="centerline white"></div>
-        <div class="goal blue"></div>
-        <div class="goal orange"></div>
+        <div id = "goalBlue" class="goal blue"></div>
+        <div id = "goalOrange" class="goal orange"></div>
         <div id="playerOne" class="car blue"></div>
         <div id="playerTwo" class="car orange"></div>
         <div id="ball" class="ball white"></div>
     </div>
+
+    <div id = "infobanner">{{banner}}</div>
