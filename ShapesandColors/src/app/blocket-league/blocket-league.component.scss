@@ -26,13 +26,19 @@ body {
     left: 5%;
     height: 80%;
     width: 90%;
+    margin: 0px;
+    padding: 0px;
 }
 .car {
     position: absolute;
     top: calc(50% - 25px);
     height: 50px;
     width: 50px;
-    border: 4px solid black;
+    border: 4px inset black;
+    border-radius: 50%;
+    border-style: inset;
+    margin: 0px;
+    padding: 0px;
 }
 .car.blue {
     left: 100px;
@@ -46,8 +52,10 @@ body {
     left: calc(50% - 50px);            
     height: 100px;
     width: 100px;
-    border: 4px solid black;
+    border: 4px inset black;
     border-radius: 50%;
+    margin: 0px;
+    padding: 0px;
 }
 .goal {
     position: absolute;
