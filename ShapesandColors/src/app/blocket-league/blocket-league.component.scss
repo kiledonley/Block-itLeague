@@ -113,7 +113,19 @@ body {
 
 #infobanner{
     position: absolute;
-    top: 30%;
-    align-content: center;
-    align-self: center;
+    top: 15%;
+    width: 100%;
+    text-align: center;
+    font-size: 10vh;
+    color: white;
+
+}
+#subbanner{
+    position: absolute;
+    top: 25%;
+    width: 100%;
+    text-align: center;
+    font-size: 5vh;
+    color: white;
+    
 }

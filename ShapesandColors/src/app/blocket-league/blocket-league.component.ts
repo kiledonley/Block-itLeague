@@ -33,10 +33,33 @@ export class BlocketLeagueComponent implements OnInit {
   playerInterval: any;
 
   ballCollisionmodifier: number;
-  banner: string;
-  subbanner: string;
+  banner: any;
+  subbanner: any;
+
+  pause : boolean
 
   constructor() { 
+
+    setInterval(() => {
+      if(!this.pause){
+      this.ballMove();
+      this.goal();
+      }
+    }, 1000 * .01);
+   
+    setInterval(() => { 
+      if(!this.pause){
+      this.handleKeyPress(); 
+      }
+    }, 1000 * .01);
+
+      setInterval(() => { 
+        if(!this.pause){
+         this.timer--
+        }
+        if(this.timer === 0){this.gameStop("gameEnd"); 
+        }
+    }, 1000 * 1);
 
   }
 
@@ -49,7 +72,7 @@ export class BlocketLeagueComponent implements OnInit {
     this.netBlue = document.getElementById('goalBlue');
     this.netOrange = document.getElementById('goalOrange');
 
-    this.timer = 300;
+    this.timer = 10;
 
     this.ballX = 0;
     this.ballY = 0; 
@@ -58,8 +81,8 @@ export class BlocketLeagueComponent implements OnInit {
     this.blueScore = 0;
     this.orangeScore = 0;
 
-    this.ballStart = false;
-    this.ballContinue = true; 
+    this.pause = true;
+
 
     this.ballCollisionmodifier = 1;
     this.banner = "BLOCK-IT LEAGUE";
@@ -72,28 +95,26 @@ export class BlocketLeagueComponent implements OnInit {
           if(event.code === this.KEY_CODES[i]){
             this.KEY_DOWN[i] = true
           }
-      }
+        }
 
-
-
+          if(this.KEY_DOWN[8] || this.KEY_DOWN[9]){
+            if(this.pause){
+              this.gameStart();
+            }
+            else{this.gameStop("pause")}
+                      }
     });
     document.addEventListener(`keyup`, event => {
     
-
         for(let i = 0; i < this.KEY_CODES.length; i++){
-            
             if(event.code === this.KEY_CODES[i]){
               this.KEY_DOWN[i] = false
             }
-
-            if(this.KEY_DOWN[8] || this.KEY_DOWN[9]){
-              this.gameStop("StartPause");
-            }
-        }
+          }
     });
   }
 
-  handleKeyPress(){  
+  public handleKeyPress(){  
 
     let Player1: Array<number> = [this.playerOne.offsetTop + this.playerOne.offsetHeight / 2, this.playerOne.offsetLeft + this.playerOne.offsetHeight / 2, this.playerOne.offsetHeight / 2]
     let Player2: Array<number> = [this.playerTwo.offsetTop + this.playerTwo.offsetHeight / 2, this.playerTwo.offsetLeft + this.playerTwo.offsetHeight / 2, this.playerTwo.offsetHeight / 2]
@@ -152,52 +173,80 @@ export class BlocketLeagueComponent implements OnInit {
   }
 
   gameStart(){
-    let countdown = 3;
+    this.banner = 3;
+    console.log(this.banner);
+    this.subbanner = "";
+    let countInterval : any;
+    console.log("gameStart")
 
-    let countInterval  = setInterval(() => { 
-        countdown--
-        if(countdown = 0){
+
+    countInterval = setInterval(() => { 
+        this.banner--
+        console.log("countinterval")
+        if(this.banner <= 0){
+          this.banner = "";
+          this.pause = false;
           clearInterval(countInterval)
         }
     }, 1000 * 1);
-
-    setTimeout(function () {
-
-    this.ballInterval = setInterval(() => { 
-      this.ballMove();
-      this.goal();
-    }, 1000 * .01);
-   
-    this.playerInterval = setInterval(() => { 
-      this.handleKeyPress();
-    }, 1000 * .01);
-
-      this.timer = setInterval(() => { 
-        this.timer--
-        if(this.timer = 0){this.gameStop("gameOver")}
-    }, 1000 * 1);
-
-    }, 1000 * 3)
   }
 
 
   gameStop(reason){
-    if(reason === "pauseStart"){
-
+    this.pause = true;
+    console.log(this.pause, "gameStop", reason)
+    if(reason === "pause"){
+      this.banner = "PAUSE"
+      this.subbanner = "press space or enter to continue"
     }
 
-    if(reason === "gameOver"){
+    if(reason === "gameEnd"){
+      console.log("final Score ",this.blueScore,this.orangeScore)
+      if(this.blueScore == this.orangeScore){this.banner = "Everyone is a Winner!"}
+      else{ 
+      this.banner = this.blueScore > this.orangeScore ? "Blue gets the Win!" : "Orange gets the Win!"
+      } 
+      this.subbanner = "press enter or space to play again!";
+      this.timer = 300;
+      this.blueScore = 0;
+      this.orangeScore = 0;
+      this.reset(0, false);
+  }
+
+    if(reason === "goalBlue" || reason === "goalOrange"){
+        this.banner = reason === "goalBlue" ? "Blue Scores!" : "Orange Scores!";
+        this.subbanner= "Gooooooooooooooooooaaaaaaaaaaaaaaaaaaaaaaaaaallllllllllll"
+        this.reset(3, true)
+    }
+  }
+
+    reset(gloat, start){
       
-    }
+    let countInterval: any;
+    countInterval = setInterval(() => {
+      gloat--
+      if(gloat <= 0){
+        this.ball.style.left = `calc(50% - 50px)`;
+        this.ball.style.top = `calc(50% - 50px)`;
+        this.playerOne.style.left = `100px`;
+        this.playerOne.style.top = `calc(50% - 25px)`;
+        this.playerTwo.style.left = `${this.arena.offsetWidth - 150 }px`;
+        this.playerTwo.style.top = `calc(50% - 25px)`;
+        this.ballX = 0;
+        this.ballY = 0;
+        if(start){
+        this.gameStart(); 
+        }
+        clearInterval(countInterval)
+      }
+    }, 1000 * 1);
 
-    if(reason === "goal"){
-      
-    }
+
   }
 
   
 
-  ballMove(){
+   ballMove(){
     let Player1: Array<number> = [this.playerOne.offsetTop + this.playerOne.offsetHeight / 2, this.playerOne.offsetLeft + this.playerOne.offsetHeight / 2, this.playerOne.offsetHeight / 2]
     let Player2: Array<number> = [this.playerTwo.offsetTop + this.playerTwo.offsetHeight / 2, this.playerTwo.offsetLeft + this.playerTwo.offsetHeight / 2, this.playerTwo.offsetHeight / 2]
     let ball: Array<number> = [this.ball.offsetTop + this.ball.offsetHeight / 2, this.ball.offsetLeft + this.ball.offsetHeight / 2, this.ball.offsetHeight / 2]
@@ -255,27 +304,27 @@ export class BlocketLeagueComponent implements OnInit {
       }
 
       goal(){
-        let blueScore = [this.netBlue.offsetLeft + this.netBlue.offsetWidth, this.netBlue.offsetTop, this.netBlue.offsetTop + this.netBlue.offsetHeight]
-        let orangeScore = [this.netOrange.offsetLeft, this.netOrange.offsetTop, this.netOrange.offsetTop + this.netOrange.offsetHeight]
+        let blueScores = [this.netBlue.offsetLeft + this.netBlue.offsetWidth, this.netBlue.offsetTop, this.netBlue.offsetTop + this.netBlue.offsetHeight]
+        let orangeScores = [this.netOrange.offsetLeft, this.netOrange.offsetTop, this.netOrange.offsetTop + this.netOrange.offsetHeight]
         let ballLeft = [this.ball.offsetLeft, this.ball.offsetTop + this.ball.offsetHeight/2]
         let ballRight = [this.ball.offsetLeft + this.ball.offsetWidth, this.ball.offsetTop + this.ball.offsetHeight/2]
 
-        if(ballLeft[0] < blueScore[0] && 
-          ballLeft[1] > blueScore[1] &&
-          ballLeft[1] < blueScore[2]         
+        if(ballLeft[0] < blueScores[0] && 
+          ballLeft[1] > blueScores[1] &&
+          ballLeft[1] < blueScores[2]         
         )
         { console.log("Orange Scores")
         this.orangeScore++
-          this.gameStop("goalOrange");
+        this.gameStop("goalOrange");
         }
-          if(ballRight[0] > orangeScore[0] && 
-            ballRight[1] > orangeScore[1] &&
-            ballRight[1] < orangeScore[2]         
-          )
-          { console.log("Blue Scores")
-          this.blueScore++
-            this.ballContinue = false};
+          if(ballRight[0] > orangeScores[0] && 
+            ballRight[1] > orangeScores[1] &&
+            ballRight[1] < orangeScores[2]         
+          ){
+            console.log("Blue Scores")
+            this.blueScore++
             this.gameStop("goalBlue");
+          }
       }
   }
       
