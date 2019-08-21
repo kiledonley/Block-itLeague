@@ -51,14 +51,14 @@ export class BlocketLeagueComponent implements OnInit {
       if(!this.pause){
       this.handleKeyPress(); 
       }
-    }, 1000 * .01);
+    }, 1000 * .005);
 
-      setInterval(() => { 
-        if(!this.pause){
-         this.timer--
-        }
-        if(this.timer === 0){this.gameStop("gameEnd"); 
-        }
+    setInterval(() => { 
+      if(!this.pause){
+        this.timer--
+      }
+      if(this.timer === 0){this.gameStop("gameEnd"); 
+      }
     }, 1000 * 1);
 
   }
@@ -141,51 +141,48 @@ export class BlocketLeagueComponent implements OnInit {
         Math.sqrt(Math.pow(Player1[0] - ball[0], 2) + Math.pow(Player1[1] - this.playerSpeed - ball[1], 2)) >= Player1[2] + ball[2]
         ) {this.playerOne.style.left = `${Player1[1] - Player1[2]- this.playerSpeed}px`};  
 
-        if(this.KEY_DOWN[3] &&
-          Player1[1] + Player1[2] + this.playerSpeed <= border[3] &&
-          Math.sqrt(Math.pow(Player1[0] - Player2[0], 2) + Math.pow(Player1[1] + this.playerSpeed  - Player2[1], 2)) >= Player1[2] + Player2[2] &&
-          Math.sqrt(Math.pow(Player1[0] - ball[0], 2) + Math.pow(Player1[1] + this.playerSpeed - ball[1], 2)) >= Player1[2] + ball[2]
-          ) {this.playerOne.style.left = `${Player1[1] - Player1[2] + this.playerSpeed}px`};  
+      if(this.KEY_DOWN[3] &&
+        Player1[1] + Player1[2] + this.playerSpeed <= border[3] &&
+        Math.sqrt(Math.pow(Player1[0] - Player2[0], 2) + Math.pow(Player1[1] + this.playerSpeed  - Player2[1], 2)) >= Player1[2] + Player2[2] &&
+        Math.sqrt(Math.pow(Player1[0] - ball[0], 2) + Math.pow(Player1[1] + this.playerSpeed - ball[1], 2)) >= Player1[2] + ball[2]
+        ) {this.playerOne.style.left = `${Player1[1] - Player1[2] + this.playerSpeed}px`};  
 
-          if(this.KEY_DOWN[4] && 
-            Player2[0] - Player2[2] - this.playerSpeed >= border[0] &&
-            Math.sqrt(Math.pow(Player2[0] - this.playerSpeed - Player1[0], 2) + Math.pow(Player2[1] - Player1[1], 2)) >= Player1[2] + Player2[2] &&
-            Math.sqrt(Math.pow(Player2[0] - this.playerSpeed - ball[0], 2) + Math.pow(Player2[1] - ball[1], 2)) >= Player2[2] + ball[2]
-            ) {this.playerTwo.style.top = `${Player2[0] - Player2[2] - this.playerSpeed}px`};     
-            
-          if(this.KEY_DOWN[5] && 
-            Player2[0] + Player2[2] + this.playerSpeed <= border[1] &&
-            Math.sqrt(Math.pow(Player2[0] + this.playerSpeed - Player1[0], 2) + Math.pow(Player2[1]- Player1[1], 2)) >= Player1[2] + Player2[2] &&
-            Math.sqrt(Math.pow(Player2[0] + this.playerSpeed - ball[0], 2) + Math.pow(Player2[1]- ball[1], 2)) >= Player2[2] + ball[2]
-            ) {this.playerTwo.style.top = `${Player2[0] - Player2[2] + this.playerSpeed}px`};  
-    
-          if(this.KEY_DOWN[6] && 
-            Player2[1] - Player2[2] - this.playerSpeed >= border[2] &&
-            Math.sqrt(Math.pow(Player2[0] - Player1[0], 2) + Math.pow(Player2[1] - this.playerSpeed  - Player1[1], 2)) >= Player1[2] + Player2[2] &&
-            Math.sqrt(Math.pow(Player2[0] - ball[0], 2) + Math.pow(Player2[1] - this.playerSpeed - ball[1], 2)) >= Player2[2] + ball[2]
-            ) {this.playerTwo.style.left = `${Player2[1] - Player2[2] - this.playerSpeed}px`};  
-    
-            if(this.KEY_DOWN[7] && 
-              Player2[1] + Player2[2] + this.playerSpeed <= border[3] &&
-              Math.sqrt(Math.pow(Player2[0] - Player1[0], 2) + Math.pow(Player2[1] + this.playerSpeed  - Player1[1], 2)) >= Player1[2] + Player2[2] &&
-              Math.sqrt(Math.pow(Player2[0] - ball[0], 2) + Math.pow(Player2[1] + this.playerSpeed - ball[1], 2)) >= Player2[2] + ball[2]
-              ) {this.playerTwo.style.left = `${Player2[1] - Player2[2] + this.playerSpeed}px`}; 
+      if(this.KEY_DOWN[4] && 
+        Player2[0] - Player2[2] - this.playerSpeed >= border[0] &&
+        Math.sqrt(Math.pow(Player2[0] - this.playerSpeed - Player1[0], 2) + Math.pow(Player2[1] - Player1[1], 2)) >= Player1[2] + Player2[2] &&
+        Math.sqrt(Math.pow(Player2[0] - this.playerSpeed - ball[0], 2) + Math.pow(Player2[1] - ball[1], 2)) >= Player2[2] + ball[2]
+        ) {this.playerTwo.style.top = `${Player2[0] - Player2[2] - this.playerSpeed}px`};     
+        
+      if(this.KEY_DOWN[5] && 
+        Player2[0] + Player2[2] + this.playerSpeed <= border[1] &&
+        Math.sqrt(Math.pow(Player2[0] + this.playerSpeed - Player1[0], 2) + Math.pow(Player2[1]- Player1[1], 2)) >= Player1[2] + Player2[2] &&
+        Math.sqrt(Math.pow(Player2[0] + this.playerSpeed - ball[0], 2) + Math.pow(Player2[1]- ball[1], 2)) >= Player2[2] + ball[2]
+        ) {this.playerTwo.style.top = `${Player2[0] - Player2[2] + this.playerSpeed}px`};  
+
+      if(this.KEY_DOWN[6] && 
+        Player2[1] - Player2[2] - this.playerSpeed >= border[2] &&
+        Math.sqrt(Math.pow(Player2[0] - Player1[0], 2) + Math.pow(Player2[1] - this.playerSpeed  - Player1[1], 2)) >= Player1[2] + Player2[2] &&
+        Math.sqrt(Math.pow(Player2[0] - ball[0], 2) + Math.pow(Player2[1] - this.playerSpeed - ball[1], 2)) >= Player2[2] + ball[2]
+        ) {this.playerTwo.style.left = `${Player2[1] - Player2[2] - this.playerSpeed}px`};  
+
+      if(this.KEY_DOWN[7] && 
+        Player2[1] + Player2[2] + this.playerSpeed <= border[3] &&
+        Math.sqrt(Math.pow(Player2[0] - Player1[0], 2) + Math.pow(Player2[1] + this.playerSpeed  - Player1[1], 2)) >= Player1[2] + Player2[2] &&
+        Math.sqrt(Math.pow(Player2[0] - ball[0], 2) + Math.pow(Player2[1] + this.playerSpeed - ball[1], 2)) >= Player2[2] + ball[2]
+        ) {this.playerTwo.style.left = `${Player2[1] - Player2[2] + this.playerSpeed}px`}; 
   }
 
   gameStart(){
     this.banner = 3;
-    console.log(this.banner);
     this.subbanner = "";
     let countInterval : any;
-    console.log("gameStart")
 
 
     countInterval = setInterval(() => { 
         this.banner--
-        console.log("countinterval")
         if(this.banner <= 0){
           this.banner = "";
-          this.pause = false;
+          this.pause = false; 
           clearInterval(countInterval)
         }
     }, 1000 * 1);
@@ -194,14 +191,13 @@ export class BlocketLeagueComponent implements OnInit {
 
   gameStop(reason){
     this.pause = true;
-    console.log(this.pause, "gameStop", reason)
     if(reason === "pause"){
       this.banner = "PAUSE"
       this.subbanner = "press space or enter to continue"
     }
 
     if(reason === "gameEnd"){
-      console.log("final Score ",this.blueScore,this.orangeScore)
+      // console.log("final Score ",this.blueScore,this.orangeScore)
       if(this.blueScore == this.orangeScore){this.banner = "Everyone is a Winner!"}
       else{ 
       this.banner = this.blueScore > this.orangeScore ? "Blue gets the Win!" : "Orange gets the Win!"
@@ -262,7 +258,7 @@ export class BlocketLeagueComponent implements OnInit {
             if(Math.sqrt(Math.pow(ball[0] - Player2[0], 2) + Math.pow(ball[1] + this.ballX - Player2[1], 2)) <= ball[2] + Player2[2] ||
            Math.sqrt(Math.pow(ball[0] - Player2[0], 2) + Math.pow(ball[1] + this.ballX - Player1[1], 2)) <= ball[2] + Player1[2]){
              this.ballX = 0;
-             console.log("ball pinned");
+             console.log("ball pinned X");
            }
         }
         if(ball[0] - ball[2] + this.ballY <= border[0] || ball[0] + ball[2] + this.ballY >= border[1]){
@@ -272,35 +268,41 @@ export class BlocketLeagueComponent implements OnInit {
           if(Math.sqrt(Math.pow(ball[0] + this.ballY - Player2[0], 2) + Math.pow(ball[1] - Player2[1], 2)) <= ball[2] + Player2[2] ||
             Math.sqrt(Math.pow(ball[0] + this.ballY - Player2[0], 2) + Math.pow(ball[1] - Player1[1], 2)) <= ball[2] + Player1[2]){
               this.ballY = 0;
-              console.log("ball pinned");
+              console.log("ball pinned Y");
             }
           }
         } 
     else{
-      if(Math.sqrt(Math.pow(ball[0] + this.ballY  - Player2[0], 2) + Math.pow(ball[1] + this.ballX - Player2[1], 2)) <= ball[2] + Player2[2] + this.ballCollisionmodifier  &&
-      Math.sqrt(Math.pow(ball[0] + this.ballY - Player2[0], 2) + Math.pow(ball[1] + this.ballX - Player1[1], 2)) <= ball[2] + Player1[2] + this.ballCollisionmodifier){
-        this.ballX = ball[1] - ((Player1[1]+Player2[1])/2)/83;
-        this.ballY = ball[0] - ((Player1[0]+Player2[0])/2/83);
-        console.log("both players touched")
-      }
-        else{
+
             if(Math.sqrt(Math.pow(ball[0] + this.ballY  - Player2[0], 2) + Math.pow(ball[1] + this.ballX - Player2[1], 2)) <= ball[2] + Player2[2] + this.ballCollisionmodifier){
+              if(Math.sqrt(Math.pow((ball[0] - Player2[0])/20 - Player1[0], 2) + Math.pow((ball[1] - Player2[1])/20 - Player1[0], 2)) <= ball[2] + Player1[2] + this.ballCollisionmodifier){
+                this.ballX = Player1[1] == Player2[1] ? 0 : ball[1] - ((Player1[1]+Player2[1])/40);
+                this.ballY = Player1[0] == Player2[0] ? 0 : ball[0] - ((Player1[0]+Player2[0])/40);
+                console.log("both players touched")
+              }
+              else{
               this.ballX = (ball[1] - Player2[1])/20; 
               this.ballY = (ball[0] - Player2[0])/20; 
               console.log("player 2 touched")
+              }
             }
             if(Math.sqrt(Math.pow(ball[0] + this.ballY  - Player1[0], 2) + Math.pow(ball[1] + this.ballX - Player1[1], 2)) <= ball[2] + Player1[2] + this.ballCollisionmodifier){
-              this.ballX = (ball[1] - Player1[1])/20;
+              if(Math.sqrt(Math.pow((ball[0] - Player1[0])/20 - Player2[0], 2) + Math.pow((ball[1] - Player1[1])/20 - Player2[0], 2)) <= ball[2] + Player2[2] + this.ballCollisionmodifier){
+                this.ballX = Player1[1] == Player2[1] ? 0 : ball[1] - ((Player1[1]+Player2[1])/40);
+                this.ballY = Player1[0] == Player2[0] ? 0 : ball[0] - ((Player1[0]+Player2[0])/40);
+                console.log("both players touched")
+              }
+              else{
+              this.ballX = (ball[1] - Player1[1])/20; 
               this.ballY = (ball[0] - Player1[0])/20; 
-              console.log("player 1 touched")
-            }
+              console.log("player 2 touched")
+              } 
           }
         }
-            
-
+          
             this.ball.style.left = `${ball[1] - ball[2] + this.ballX}px`;
             this.ball.style.top = `${ball[0] - ball[2] + this.ballY}px`;
-            console.log(this.ballX,this.ballY); 
+            // console.log(this.ballX,this.ballY); 
       }
 
       goal(){
