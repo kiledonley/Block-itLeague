@@ -1,0 +1,29 @@
+{
+  "name": "Block-itLeague",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "dependencies": {
+    "async": "^2.6.2",
+    "dotenv": "^8.1.0",
+    "express": "^4.17.1",
+    "node.js": "^0.0.0",
+    "tedious": "^5.0.3"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kiledonley/Block-itLeague.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kiledonley/Block-itLeague/issues"
+  },
+  "homepage": "https://github.com/kiledonley/Block-itLeague#readme"
+}
