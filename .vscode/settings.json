@@ -1,0 +1,7 @@
+{
+    "appService.deploySubpath": "",
+    "appService.zipIgnorePattern": [
+        ".vscode{,/**}"
+    ],
+    "appService.defaultWebAppToDeploy": "/subscriptions/0d1af31f-7237-4bb9-9d7e-ab142c60a0fd/resourceGroups/appsvc_linux_centralus/providers/Microsoft.Web/sites/block-it"
+}
