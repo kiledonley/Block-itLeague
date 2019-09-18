@@ -1,3 +1,7 @@
+const appInsights = require("applicationinsights");
+appInsights.setup("<instrumentation_key>");
+appInsights.start();
+
 var Connection = require('tedious').Connection;
 var Request = require('tedious').Request;
 require('dotenv').config()
